@@ -17,6 +17,11 @@ module.exports = {
         paths: ['src'],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
+      typescript: {}, // Para reconhecer `tsconfig.json`
+      alias: {
+        map: [['~', './src']],
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      },
     },
   },
   rules: {
