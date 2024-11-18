@@ -1,20 +1,40 @@
-
 import * as S from "./styles";
 import RegistrationCard from "../RegistrationCard";
+import { useMemo } from "react";
+import { RegistrationProps } from "~/types";
+
+export enum STATUS {
+  REVIEW = "REVIEW",
+  APPROVED = "APPROVED",
+  REPROVED = "REPROVED"
+}
 
 const allColumns = [
-  { status: 'REVIEW', title: "Pronto para revisar" },
-  { status: 'APPROVED', title: "Aprovado" },
-  { status: 'REPROVED', title: "Reprovado" },
+  { status: STATUS.REVIEW, title: "Pronto para revisar" },
+  { status: STATUS.APPROVED, title: "Aprovado" },
+  { status: STATUS.REPROVED, title: "Reprovado" },
 ];
 
 type Props = {
-  registrations?: any[];
+  registrations?: RegistrationProps[];
 };
+
 const Collumns = (props: Props) => {
+  const { registrations } = props;
+
+  const filteredRegistrations = useMemo(() => {
+    return registrations?.reduce((acc: any, registration: RegistrationProps) => {
+      if (!acc[registration.status]) {
+        acc[registration.status] = [];
+      }
+      acc[registration.status].push(registration);
+      return acc;
+    }, {});
+  }, [registrations]);
+
   return (
     <S.Container>
-      {allColumns.map((collum) => {
+      {allColumns.map((collum: any) => {
         return (
           <S.Column status={collum.status} key={collum.title}>
             <>
@@ -22,14 +42,14 @@ const Collumns = (props: Props) => {
                 {collum.title}
               </S.TitleColumn>
               <S.CollumContent>
-                {props?.registrations?.map((registration) => {
-                  return (
+                {(filteredRegistrations[collum.status] || []).map(
+                  (registration: RegistrationProps) => (
                     <RegistrationCard
                       data={registration}
                       key={registration.id}
                     />
-                  );
-                })}
+                  )
+                )}
               </S.CollumContent>
             </>
           </S.Column>
