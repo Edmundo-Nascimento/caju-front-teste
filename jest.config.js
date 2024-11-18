@@ -10,5 +10,9 @@ export default {
   moduleNameMapper: {
     "^~/(.+)": "<rootDir>/src/$1",
   },
+  modulePathIgnorePatterns: [
+    "<rootDir>/__tests__/mocks/"  // Caminho para a pasta de mocks que você quer ignorar
+  ],
+
 //   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
 };
