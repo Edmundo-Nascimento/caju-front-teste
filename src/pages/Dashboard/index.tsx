@@ -3,7 +3,6 @@ import * as S from "./styles";
 import { SearchBar } from "./components/Searchbar";
 import { useEffect } from "react";
 import useRegistrationStore from "~/store/registration";
-import DraggableColumns from "./components/DragAndDrop/DraggableColumns";
 
 const DashboardPage = () => {
   const { registrations, fetchRegistration }: any = useRegistrationStore();
@@ -16,7 +15,6 @@ const DashboardPage = () => {
     <S.Container>
       <SearchBar />
       <Collumns registrations={registrations} />
-      {/* <DraggableColumns registrations={registrations} /> */}
     </S.Container>
   );
 };

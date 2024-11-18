@@ -1,4 +1,4 @@
-const buildHttpRequestQueryParams = params => {
+const buildHttpRequestQueryParams = (params: Record<string, any>): string => {
   let queryParams = '';
   for (let key in params) {
     if (params[key] !== null && params[key] !== ' ' && params[key] !== '') {
@@ -8,7 +8,7 @@ const buildHttpRequestQueryParams = params => {
   return removeLastSignal(queryParams, queryParams.length);
 };
 
-const removeLastSignal = (queryParam, stringLength) => {
+const removeLastSignal = (queryParam: string, stringLength: number) => {
   return queryParam.slice(0, stringLength - 1);
 };
 

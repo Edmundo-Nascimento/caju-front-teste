@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+interface SkeletonLineProps {
+  height?: string;
+  width?: string;
+}
+
 const SkeletonCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -11,7 +16,7 @@ const SkeletonCard = styled.div`
   background-color: #fff;
 `;
 
-const SkeletonLine = styled.div`
+const SkeletonLine = styled.div<SkeletonLineProps>`
   height: ${(props) => props.height || "16px"};
   background-color: #e0e0e0;
   border-radius: 4px;

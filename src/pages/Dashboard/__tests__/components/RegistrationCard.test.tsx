@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { jest } from "@jest/globals";
-import React, { act } from 'react';
+import { act } from 'react';
 import { fireEvent, screen, render } from '@testing-library/react';
 import { toast } from "react-toastify";
 
@@ -24,7 +24,7 @@ describe("Should test handleStatusUpdate e handleDelete", () => {
 
   });
 
-  const handleAction = async (callback, message) => {
+  const handleAction = async (callback: () => Promise<any>, message: string) => {
     const resposta = confirm("Você tem certeza que deseja continuar?");
     if (resposta) {
       await callback();
@@ -35,7 +35,7 @@ describe("Should test handleStatusUpdate e handleDelete", () => {
     }
   };
 
-  const handleStatusUpdate = async (newStatus) => {
+  const handleStatusUpdate = async (newStatus: string) => {
     await handleAction(
       async () => await mockUpdateRegistration(registration.id, newStatus),
       "Registro atualizado com sucesso!"
@@ -51,9 +51,8 @@ describe("Should test handleStatusUpdate e handleDelete", () => {
 
   test("Should update the record status to APPROVED", async () => {
 
-    let container;
     act(() => {
-      container = render(<RegistrationCard data={registration} />);
+      render(<RegistrationCard data={registration} />);
     });
 
     const btn = screen.getByText("Aprovar");
@@ -81,9 +80,8 @@ describe("Should test handleStatusUpdate e handleDelete", () => {
 
   test("Should update the record status to REPROVED", async () => {
 
-    let container;
     act(() => {
-      container = render(<RegistrationCard data={registration} />);
+      render(<RegistrationCard data={registration} />);
     });
 
     const btn = screen.getByText("Reprovar");
@@ -111,9 +109,8 @@ describe("Should test handleStatusUpdate e handleDelete", () => {
 
   test("Should delete the register", async () => {
 
-    let container;
     act(() => {
-      container = render(<RegistrationCard data={registration} />);
+      render(<RegistrationCard data={registration} />);
     });
 
     const deleteButton = screen.getByTestId('deleteBtn');
@@ -143,9 +140,8 @@ describe("Should test handleStatusUpdate e handleDelete", () => {
   test("Should verify the cancel message in the prompt", async () => {
     const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
 
-    let container;
     act(() => {
-      container = render(<RegistrationCard data={registration} />);
+      render(<RegistrationCard data={registration} />);
     });
 
     const btn = screen.getByText("Aprovar");

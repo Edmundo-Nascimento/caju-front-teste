@@ -50,7 +50,7 @@ const NewUserPage = () => {
       ...values,
       status: STATUS.REVIEW,
       admissionDate: formatData(values.admissionDate),
-      cpf: removeCharacters(values.cpf) || "",
+      cpf: removeCharacters(values.cpf),
     };
 
     try {
